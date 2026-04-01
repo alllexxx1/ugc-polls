@@ -45,7 +45,9 @@ class NextQuestionView(APIView):
         if not next_question:
             session.is_completed = True
             session.save(update_fields=['completed_at', 'is_completed'])
-            return Response({'status': 'completed', 'message': 'Survey is finished!'}, status=status.HTTP_200_OK)
+            return Response(
+                {'status': 'completed', 'message': 'Survey is finished!'}, status=status.HTTP_200_OK
+            )
 
         serializer = QuestionSerializer(next_question)
         return Response({'status': 'in_progress', 'question': serializer.data}, status=status.HTTP_200_OK)
