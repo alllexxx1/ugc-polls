@@ -11,3 +11,60 @@ dependencies = [
     "psycopg2-binary>=2.9.11",
     "python-dotenv>=1.2.2",
 ]
+[dependency-groups]
+dev = [
+    "ruff>=0.15.8",
+]
+
+
+[tool.ruff]
+target-version = "py313"
+line-length = 112
+indent-width = 4
+exclude = [
+    "__init__.py",
+    "settings.py",
+    "migrations",
+    "management",
+    "venv", ".venv", "env", ".env",
+    "static",
+]
+fix = false
+
+[tool.ruff.lint]
+preview = true
+select = [
+    "E",  # pycodstyle errors
+    "F",  # Pyflakes (logic-level checking)
+    "W",  # pycodestyle warnings
+    "I",  # isort (import sorting)
+    "N",  # pep8-naming
+    "B",  # flake8-bugbear (common mistakes)
+    "C901",  # mccabe complexity
+    "S",  # Security rules
+]
+ignore = ["S101"]
+fixable = ["I", "E225", "E226", "E227", "E228", "E261", "E301", "E302", "E303", "W292", "W391"]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+force-sort-within-sections = false
+force-single-line = false
+lines-between-types = 1
+split-on-trailing-comma = true
+order-by-type = true
+known-first-party = []
+known-third-party = ["django", "djangorestframework"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 8
+
+[tool.ruff.format]
+preview = true
+quote-style = "single"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = false
+exclude=["__init__.py", "settings.py"]
+
